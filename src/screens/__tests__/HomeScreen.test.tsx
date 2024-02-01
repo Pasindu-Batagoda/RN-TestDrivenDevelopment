@@ -11,8 +11,25 @@ describe('HomeScreen', () =>{
 
 describe('Title section', () =>{
 
-    jest.useFakeTimers('modern')
-    jest.setSystemTime(946684800000) // Saturday, 01 January 2000 00:00 UTC
+    beforeEach(() =>{
+        jest.useFakeTimers('modern')
+        jest.setSystemTime(946684800000) // Saturday, 01 January 2000 00:00 UTC
+    })
+
+    afterEach(() =>{
+        jest.useRealTimers()
+    })
+
+    test('Should contain current date', ()=>{
+        const wrapper = render(<HomeScreen/>)
+        wrapper.getByText('Jan 01, 2000')
+    })
+
+    test('Should contain current day', ()=>{
+        const wrapper = render(<HomeScreen/>)
+        wrapper.getByText('Saturday')
+    })
+    
     
 
 });
